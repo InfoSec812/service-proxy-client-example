@@ -1,5 +1,5 @@
 // Create an instance of the EventBus
-var eb = new this.EventBus(window.location.origin+"/eventbus/");
+var eb = new EventBus(window.location.origin+"/eventbus/");
 
 // Create an instance of the Service Proxy, but it cannot be used until the EventBus is connected
 var svc = new TestService(eb, "test.service");
@@ -26,4 +26,4 @@ var svcCaller = function() {
 // Once the EventBus is connected, start the timer loop.
 eb.onopen = function() {
     svcCaller();
-}
+};
