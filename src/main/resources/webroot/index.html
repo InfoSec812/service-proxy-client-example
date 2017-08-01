@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>Vert.x Service Proxy Example</title>
+    <script src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+    <script src="scripts/vertx-eventbus.js"></script>
+    <script src="scripts/test_service-proxy.js"></script>
+    <script language="JavaScript1.5">
+        var eb = new this.EventBus(window.location.origin+"/eventbus/");
+        eb.onopen = function() {
+            TestService.create(eb);
+            var svc = new TestService(eb, "test.service");
+            svc.test(function(res, err) {
+                if (err === undefined || err === null) {
+                    console.log(res);
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    Look at the console.
+</body>
+</html>
