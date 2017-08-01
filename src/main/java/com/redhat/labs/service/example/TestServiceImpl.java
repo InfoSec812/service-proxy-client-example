@@ -5,6 +5,12 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.TimeZone;
+
 public class TestServiceImpl implements TestService {
 
     private final Vertx vertx;
@@ -14,6 +20,8 @@ public class TestServiceImpl implements TestService {
     }
 
     public void test(Handler<AsyncResult<String>> handler) {
-        handler.handle(Future.succeededFuture("Test Result"));
+        StringBuilder sb = new StringBuilder("Test Result: ");
+        sb.append(Instant.now().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.RFC_1123_DATE_TIME));
+        handler.handle(Future.succeededFuture(sb.toString()));
     }
 }
