@@ -12,3 +12,8 @@ a frontend web client.
 
 ## Screenshot
 ![Screenshot Of Browser Debugging](https://github.com/InfoSec812/service-proxy-debugging/blob/master/Screenshot_2017-08-01_10-18-58.png)
+
+## Details
+The HTML/JavaScript code can be found in the `src/main/resources/webroot` directory.
+When you compile the application, it will put a copy of the generated
+JavaScript code into the `scripts` directory under the `webroot`.
