@@ -3,3 +3,4 @@
 service-proxy-debugging.iml
 .idea/
 target/
+src/main/resources/webroot/scripts/test_service-proxy.js
