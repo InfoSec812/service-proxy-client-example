@@ -76,6 +76,24 @@
                     </annotationProcessors>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-file</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>target/generated-sources/annotations/test-service-js/test_service-proxy.js</sourceFile>
+                            <destinationFile>src/main/resources/webroot/scripts/test_service-proxy.js</destinationFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
