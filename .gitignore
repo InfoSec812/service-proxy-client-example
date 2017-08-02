@@ -1,6 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
-.vertx/
-service-proxy-debugging.iml
-.idea/
-target/
-src/main/resources/webroot/scripts/test_service-proxy.js
+**/.vertx/
+**/*.iml
+**/.idea/
+**/target/
+**/dist/
+frontend/node/
+frontend/node_modules/
+/backend/src/main/resources/webroot/static/**/*
+/backend/src/main/resources/webroot/index.html
