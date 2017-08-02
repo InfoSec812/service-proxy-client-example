@@ -3,8 +3,8 @@
 **/*.iml
 **/.idea/
 **/target/
-src/main/web/node/
-src/main/web/node_modules/
+src/main/web/node
+src/main/web/node_modules
 src/main/resources/webroot/static/**/*
 src/main/resources/webroot/index.html
 src/main/web/lib/**/*
