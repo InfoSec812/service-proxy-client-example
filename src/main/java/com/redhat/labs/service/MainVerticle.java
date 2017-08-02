@@ -2,9 +2,11 @@ package com.redhat.labs.service;
 
 import com.redhat.labs.service.example.TestService;
 import com.redhat.labs.service.example.TestServiceImpl;
+import com.redhat.labs.service.verticles.TimerVerticle;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
+import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.ReplyException;
 import io.vertx.ext.web.Router;
@@ -34,11 +36,15 @@ public class MainVerticle extends AbstractVerticle {
 
         Router router = Router.router(vertx);
         BridgeOptions bOpts = new BridgeOptions();
-        bOpts.addInboundPermitted(new PermittedOptions().setAddress(TEST_SERVICE));
-        bOpts.addOutboundPermitted(new PermittedOptions().setAddress(TEST_SERVICE));
+        bOpts.addInboundPermitted(new PermittedOptions()
+                .setAddress(TEST_SERVICE));
+        bOpts.addOutboundPermitted(new PermittedOptions()
+                .setAddress(TEST_SERVICE)
+                .setAddress(TimerVerticle.PERIODIC_TIMER));
         SockJSHandler sockJSHandler = SockJSHandler.create(vertx);
         sockJSHandler.bridge(bOpts);
         router.route("/eventbus/*").handler(sockJSHandler);
+
         router.route().handler(StaticHandler.create().setCachingEnabled(false));
 
         Router restV1 = Router.router(vertx);
@@ -59,7 +65,19 @@ public class MainVerticle extends AbstractVerticle {
         // Attach subrouter to main router
         router.mountSubRouter("/rest/v1", restV1);
 
-        vertx.createHttpServer().requestHandler(router::accept).listen(8080, startFuture.completer());
+        Future timeFuture = Future.future();
+        Future httpFuture = Future.future();
+
+        vertx.deployVerticle(new TimerVerticle(), timeFuture.completer());
+
+        vertx.createHttpServer().requestHandler(router::accept).listen(8080, httpFuture.completer());
+        CompositeFuture.all(timeFuture, httpFuture).setHandler((comp) -> {
+            if (comp.succeeded()) {
+                startFuture.complete();
+            } else {
+                startFuture.fail(comp.cause());
+            }
+        });
     }
 
     /**
