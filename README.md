@@ -17,5 +17,9 @@ The frontend Maven plugin allows various `npm` commands to be tied to Maven phas
 the entire application is built as part of a single `maven package` command from the parent
 project.
 
+The Maven `reactor` builds projects in order as they are listed in the parent POM. In this
+case, we build the Vue.js application first. Once the frontend app is built, then we build
+the backend application with the web client code baked into the executable JAR file. 
+
 ## Screenshot
 ![Screenshot Of Browser](https://github.com/InfoSec812/service-proxy-debugging/blob/master/Screenshot_2017-08-01_10-18-58.png)
