@@ -96,11 +96,11 @@
                     <goals>
                         <goal>install-node-and-npm</goal>
                     </goals>
-                    <phase>generate-sources</phase>
+                    <phase>none</phase>
                 </execution>
                 <execution>
                     <id>npm_install</id>
-                    <phase>generate-sources</phase>
+                    <phase>none</phase>
                     <goals>
                         <goal>npm</goal>
                     </goals>
@@ -146,52 +146,6 @@
                                 </includes>
                             </resource>
                         </resources>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-clean-plugin</artifactId>
-            <version>3.0.0</version>
-            <executions>
-                <execution>
-                    <phase>clean</phase>
-                    <goals>
-                        <goal>clean</goal>
-                    </goals>
-                    <configuration>
-                        <filesets>
-                            <fileset>
-                                <directory>src/main/resources/webroot</directory>
-                                <includes>
-                                    <include>**</include>
-                                </includes>
-                            </fileset>
-                        </filesets>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>clean_node</id>
-                    <phase>initialize</phase>
-                    <goals>
-                        <goal>clean</goal>
-                    </goals>
-                    <configuration>
-                        <filesets>
-                            <fileset>
-                                <directory>src/main/web/node</directory>
-                                <includes>
-                                    <include>**</include>
-                                </includes>
-                            </fileset>
-                            <fileset>
-                                <directory>src/main/web/node_modules</directory>
-                                <includes>
-                                    <include>**</include>
-                                </includes>
-                            </fileset>
-                        </filesets>
                     </configuration>
                 </execution>
             </executions>

@@ -44,7 +44,11 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                include: [resolve('src'), resolve('test')]
+                include: [resolve('src'), resolve('test')],
+                query: {
+                    presets: ['react', 'es2015', 'react-hmre'],
+                    plugins: ['transform-class-properties']
+                }
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

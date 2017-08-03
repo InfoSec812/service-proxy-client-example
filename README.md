@@ -6,15 +6,15 @@ a frontend web client.
 
 ## Instructions
 
-1. Build The Application `mvn clean compile package vertx:package`
+1. Build The Application `mvn clean package vertx:package`
 1. Run The Application `java -jar backend/target/backend-<version>.jar`
 1. Open A Browser to http://localhost:8080
 
 ## Details
 This project is a combination of a Vert.x Java application and a Vue.js/WebPack application. The
 whole project is wired into Maven using the [frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin)
-such that running the typical Maven operations (`mvn clean compile package`) will compile
-the Java code, transpile the Vue.js ES6 code, and package the whole thing as an executable JAR file.
+such that running the typical Maven operations (`mvn clean package vertx:package`) will compile
+the Java code, trans-pile the Vue.js ES6 code, and package the whole thing as an executable JAR file.
 
 ## How it works
 
