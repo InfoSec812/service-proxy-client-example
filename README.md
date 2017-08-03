@@ -1,4 +1,4 @@
-# Vert.x Example Project Using Service Proxies
+# Vert.x Example Project Using Service Proxies With Vue.JS
 
 ## Overview
 This project demonstrates the use of Service Proxies in
@@ -6,14 +6,26 @@ a frontend web client.
 
 ## Instructions
 
-1. Run The Application `mvn clean compile vertx:run`
+1. Build The Application `mvn clean package vertx:package`
+1. Run The Application `java -jar backend/target/backend-<version>.jar`
 1. Open A Browser to http://localhost:8080
-1. Wait for a the looping timer to show results.
 
 ## Details
-The HTML/JavaScript code can be found in the `src/main/resources/webroot` directory.
-When you compile the application, it will put a copy of the generated
-JavaScript code into the `scripts` directory under the `webroot`.
+This project is a combination of a Vert.x Java application and a Vue.js/WebPack application. The
+whole project is wired into Maven using the [frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin)
+such that running the typical Maven operations (`mvn clean package vertx:package`) will compile
+the Java code, trans-pile the Vue.js ES6 code, and package the whole thing as an executable JAR file.
 
-## Screenshot
-![Screenshot Of Browser Debugging](https://github.com/InfoSec812/service-proxy-debugging/blob/master/Screenshot_2017-08-01_10-18-58.png)
+## How it works
+
+### Vert.x Code
+* The Vert.x code is in Java, under the `src/main/java` directory. 
+* The entry-point for the app is `com.redhat.labs.service.MainVerticle`. 
+* The MainVerticle registers the [Service Proxy](http://vertx.io/docs/vertx-service-proxy/java/) called `TestService` on the EventBus.
+* The MainVerticle creates a [Router](http://vertx.io/docs/vertx-web/java/#_basic_vert_x_web_concepts)
+* We tie various paths and HTTP verbs to the router
+* We create an additional Router instance for the REST API
+* We *mount* the REST Router as a `subrouter` on the top-level Router
+* We tell Vert.x that the application is ready.
+
+### Vue.js Code
