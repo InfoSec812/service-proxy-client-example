@@ -7,7 +7,7 @@ a frontend web client.
 ## Instructions
 
 1. Build The Application `mvn clean package vertx:package`
-1. Run The Application `java -jar backend/target/backend-<version>.jar`
+1. Run The Application `java -jar backend/target/vertx-vue-example-<version>.jar`
 1. Open A Browser to http://localhost:8080
 
 ## Details
