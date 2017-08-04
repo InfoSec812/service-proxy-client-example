@@ -48,7 +48,12 @@ new Vue({
                     }
                 });
             };
+            this.eb.onclose = () => {
+                const reconnectDelay = 500*
+                console.log("EventBus disconnected. ")
+            };
         }
+
     },
     mounted: function() {
         console.log('Application mounted, starting eventBus Bridge');

@@ -73,10 +73,15 @@
                         <goal>package</goal>
                     </goals>
                 </execution>
+                <execution>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                    <configuration>
+                        <redeploy>true</redeploy>
+                    </configuration>
+                </execution>
             </executions>
-            <configuration>
-                <redeploy>true</redeploy>
-            </configuration>
         </plugin>
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -85,6 +90,25 @@
                     <annotationProcessor>io.vertx.serviceproxy.ServiceProxyProcessor</annotationProcessor>
                 </annotationProcessors>
             </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+                <execution>
+                    <id>add-source</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>add-source</goal>
+                    </goals>
+                    <configuration>
+                        <sources>
+                            <source>src/main/web/src</source>
+                        </sources>
+                    </configuration>
+                </execution>
+            </executions>
         </plugin>
         <plugin>
             <groupId>com.github.eirslett</groupId>
@@ -109,8 +133,7 @@
                     </configuration>
                 </execution>
                 <execution>
-                    <id>build</id>
-                    <phase>prepare-package</phase>
+                    <phase>none</phase>
                     <goals>
                         <goal>npm</goal>
                     </goals>
